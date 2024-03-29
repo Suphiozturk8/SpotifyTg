@@ -1,0 +1,6 @@
+spotipy
+git+https://github.com/Phyco-Ninja/spotify-downloader
+Pyrogram
+tgcrypto
+APScheduler
+colorlog
