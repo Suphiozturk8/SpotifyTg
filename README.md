@@ -9,6 +9,14 @@ This Telegram bot allows users to download songs from Spotify and share currentl
 - Share currently playing songs in a Telegram chat.
 - Automatically delete duplicate songs.
 
+## Screenshots
+1. Song Playing on Spotify:
+   ![Song Playing on Spotify](https://telegra.ph/file/06296158a21302616ac81.jpg)
+   In this screenshot, you can see the song currently playing on Spotify.
+2. Currently Playing and Downloaded Song:
+   ![Downloaded Song](https://telegra.ph/file/5150ef5183d7875716d07.jpg)
+   In this screenshot, you can see that the song currently playing on Spotify is shared and downloaded on the Telegram channel.
+
 ## Configuration
 Before running the bot, configure the following settings in the `config.py` file:
 - [Spotify API](https://developer.spotify.com/dashboard/applications) credentials
