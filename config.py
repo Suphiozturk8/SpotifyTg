@@ -6,7 +6,7 @@ REDIRECT_URI = ""
 USER_NAME = ""
 
 # https://my.telegram.org/
-API_ID = 
+API_ID = None
 API_HASH = ""
 
 # @BotFather
@@ -18,7 +18,7 @@ USER_BOT = False
 STRING_SESSION  = ""
 
 # Get this value using the @username_to_id_bot bot. Ex: -1001234567890
-CHAT_ID = 
+CHAT_ID = None
 
 # Set to True to enable file logging, False to disable
 LOG_TO_FILE = True

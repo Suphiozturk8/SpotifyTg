@@ -83,34 +83,15 @@ async def process_audio_messages(c):
         audio = m.audio
         full_track = f"{audio.performer} - {audio.title}"
 
-        db.downloaded(full_track)
+        if not db.is_downloaded(full_track):
+            db.downloaded(full_track)
 
 
-async def send_song(c):
-    result = now.current_song()
-    if result != "paused":
-        if not db.is_downloaded(result["full_track"]):
-            db.downloaded(result["full_track"])
-            link = result["song_url"]
-        else:
-            link = False
-
-        if link:
-            track = await down.download_song(link)
-            await c.send_audio(
-                chat_id=CHAT_ID,
-                audio=track,
-                caption=f"[Spotify]({link}) | [Other](https://song.link/s/{result['song_id']})"
-            )
-            os.remove(track)
-
-
-async def edit_message(c):
+async def spotify_to_telegram(c):
     global last_song
     global message_id
 
     result = now.current_song()
-
     if result != "paused":
         if message_id is None:
             message_id = await send_post(c, result)
@@ -135,6 +116,20 @@ async def edit_message(c):
                 last_song = result["full_track"]
             except (MessageNotModified, MessageIdInvalid):
                 message_id = await send_post(c, result)
+
+        link = False
+        if not db.is_downloaded(result["full_track"]):
+            db.downloaded(result["full_track"])
+            link = result["song_url"]
+
+        if link:
+            track = await down.download_song(link)
+            await c.send_audio(
+                chat_id=CHAT_ID,
+                audio=track,
+                caption=f"[Spotify]({link}) | [Other](https://song.link/s/{result['song_id']})"
+            )
+            os.remove(track)
 
 
 async def send_post(c, result):

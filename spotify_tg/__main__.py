@@ -12,9 +12,8 @@ from config import CHAT_ID, USER_BOT
 from .clients import BotClient, UserClient
 from .database import Database
 from .handlers import (
-    send_song,
-    edit_message,
     check_and_add_song,
+    spotify_to_telegram,
     handle_callback_query,
     process_audio_messages
 )
@@ -56,16 +55,11 @@ async def main():
 
     scheduler = AsyncIOScheduler()
     scheduler.add_job(
-        send_song,
+        spotify_to_telegram,
         "interval",
         seconds=40,
-        args=[bot_client]
-    )
-    scheduler.add_job(
-        edit_message,
-        "interval",
-        seconds=40,
-        args=[bot_client]
+        args=[bot_client],
+        max_instances=2
     )
     scheduler.start()
 
